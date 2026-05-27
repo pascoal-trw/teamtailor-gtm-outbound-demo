@@ -1,0 +1,237 @@
+{
+  "scraped_at": "2026-05-27",
+  "source_urls": {
+    "customers": "https://www.teamtailor.com/en/customers/",
+    "product": "https://www.teamtailor.com/en/product/",
+    "integrations": "https://www.teamtailor.com/en/integrations/",
+    "homepage": "https://www.teamtailor.com/en/"
+  },
+  "marcus_voice_anchor": "Forward Deployed AI Accelerator | Corporate Development | Stockholm\n\nWe are embedding AI practitioners within GTM and Operations teams to design\nand implement autonomous workflows that transform how Teamtailor operates.\n\nKey responsibilities:\n- Embed with GTM and Operations teams to understand workflows deeply\n- Identify high-leverage transformation opportunities\n- Help evaluate and build new tools, agents, automations and skills\n  customized per workflow\n- Coach teams through progressive AI adoption stages\n- Map processes to identify organizational patterns\n- Scale successful solutions across teams\n\nWe want deep AI practitioners who build agents, automations and tools\nfluently, ship internal tools, run cross-functional projects, recognize\npatterns, have a bias toward action over theoretical presentations, and\nare comfortable with ambiguity in new operating models.\n",
+  "customers": {
+    "customers": [
+      {
+        "name": "Sessions",
+        "industry": null,
+        "size_hint": null,
+        "quote": "I had a demo with Teamtailor and was pretty much in love with it from then on."
+      },
+      {
+        "name": "Home Made",
+        "industry": null,
+        "size_hint": null,
+        "quote": "Teamtailor is a great ATS if you are looking for great user experience from both the recruiter and candidate side."
+      },
+      {
+        "name": "SATS",
+        "industry": null,
+        "size_hint": null,
+        "quote": "Teamtailor has helped us a lot with our daily operations. Everything runs smoothly, and seamlessly, and is safe and secure as well. The whole back office administration has become so much easier. There has been a significant reduction in time, which is important to us. And our users love the system."
+      },
+      {
+        "name": "Whyte & Mackay",
+        "industry": null,
+        "size_hint": null,
+        "quote": "The candidate experience is super important to us and Teamtailor has allowed us to make sure each touchpoint is as personalised as it can be to the candidate, no matter the role they are applying for. It's been a game changer for our recruitment process."
+      },
+      {
+        "name": "Fenix Outdoor",
+        "industry": null,
+        "size_hint": null,
+        "quote": "Teamtailor was an awesome match for us and as we have continued to grow, the continued development of Teamtailor's features have really strengthened our relationship!"
+      },
+      {
+        "name": "John Fluevog Shoes",
+        "industry": null,
+        "size_hint": null,
+        "quote": "I love Teamtailor! It's so friendly and fun to use. Our candidates get a great experience and enjoy filling out applications. I've used other products, but nothing else is quite like TT. <3 I love telling other people about it, I feel like I've found a \"secret\" awesome ATS."
+      },
+      {
+        "name": "Giacom",
+        "industry": null,
+        "size_hint": null,
+        "quote": "Cost was a big factor and the ROI we have already seen on the price we have paid for the system has been great."
+      },
+      {
+        "name": "Klass Wagen",
+        "industry": null,
+        "size_hint": null,
+        "quote": "Co-pilot has been a great addition to our team. It's helped us streamline our process and save time on repetitive tasks, while still providing useful insights"
+      },
+      {
+        "name": "Pemo",
+        "industry": "fintech",
+        "size_hint": null,
+        "quote": null
+      },
+      {
+        "name": "Actavo",
+        "industry": null,
+        "size_hint": null,
+        "quote": null
+      },
+      {
+        "name": "ESTO",
+        "industry": "fintech",
+        "size_hint": null,
+        "quote": null
+      },
+      {
+        "name": "Rocco Forte Hotels",
+        "industry": "hospitality",
+        "size_hint": null,
+        "quote": null
+      },
+      {
+        "name": "Lotus",
+        "industry": null,
+        "size_hint": null,
+        "quote": null
+      },
+      {
+        "name": "Dacha Real Estate",
+        "industry": "real estate",
+        "size_hint": null,
+        "quote": null
+      },
+      {
+        "name": "Movember",
+        "industry": null,
+        "size_hint": null,
+        "quote": null
+      },
+      {
+        "name": "Wego",
+        "industry": null,
+        "size_hint": null,
+        "quote": null
+      },
+      {
+        "name": "Scandinavian Executive",
+        "industry": null,
+        "size_hint": null,
+        "quote": null
+      },
+      {
+        "name": "GoodOaks Homecare",
+        "industry": "homecare",
+        "size_hint": null,
+        "quote": null
+      },
+      {
+        "name": "Precis",
+        "industry": null,
+        "size_hint": null,
+        "quote": null
+      }
+    ]
+  },
+  "product": {
+    "features": [
+      {
+        "name": "Applicant Tracking System",
+        "value_prop": "Modern ATS for managing the complete recruitment workflow."
+      },
+      {
+        "name": "Employer Branding",
+        "value_prop": "Deliver the best candidate experience to attract top talent."
+      },
+      {
+        "name": "Candidate Relationship Management",
+        "value_prop": "Find the right candidates faster through relationship management."
+      },
+      {
+        "name": "AI Co-pilot",
+        "value_prop": "Automate time-consuming recruitment tasks with AI assistance."
+      },
+      {
+        "name": "Interview Kits",
+        "value_prop": "Conduct structured interviews consistently across all candidates."
+      },
+      {
+        "name": "Career Site",
+        "value_prop": "Attract the right candidates with a branded career page."
+      },
+      {
+        "name": "Automation and Triggers",
+        "value_prop": "Streamline hiring workflows with automated processes."
+      },
+      {
+        "name": "Reporting",
+        "value_prop": "Make data-driven recruitment decisions with analytics."
+      },
+      {
+        "name": "Onboarding",
+        "value_prop": "Seamlessly welcome and integrate new hires into your organization."
+      },
+      {
+        "name": "Integrations",
+        "value_prop": "Connect with 500+ tools and platforms in your hiring stack."
+      }
+    ],
+    "positioning": "Teamtailor is a modern applicant tracking system and recruitment platform serving small to midsize and enterprise organizations."
+  },
+  "integrations": {
+    "integration_categories": [
+      "Job Boards",
+      "HR Software",
+      "Background Screening",
+      "Candidate Assessment",
+      "E-Signature",
+      "Applicant Tracking",
+      "Onboarding",
+      "Payroll",
+      "Talent Intelligence",
+      "Skills Assessment",
+      "Video Interviews",
+      "CV Screening"
+    ],
+    "notable_integrations": [
+      "LinkedIn",
+      "ADP Workforce Now",
+      "Adobe Acrobat Sign",
+      "Bamboo HR",
+      "AssessFirst",
+      "Arctic Shores",
+      "Bryq",
+      "ApplyPRO CV Screening",
+      "Adzuna",
+      "CV-Library",
+      "Canditech",
+      "CLARA",
+      "Alkemy",
+      "Alva Labs",
+      "Amiqus",
+      "Approof",
+      "Assently E-Sign",
+      "ASTRNT",
+      "Aboard by Teamtailor",
+      "Access PeopleHR",
+      "Appogee HR",
+      "AI Screened",
+      "Aivy GmbH",
+      "CatalystOne 3.0",
+      "Apifonica",
+      "Avokaado",
+      "Assessio",
+      "Assessment Engine",
+      "Automated Shortlist - Skill Society"
+    ]
+  },
+  "homepage": {
+    "tagline": "Hire for growth. The ATS loved by candidates and recruiters — with AI at the core.",
+    "primary_value_props": [
+      "AI Co-pilot that uncovers hidden talent and evaluates candidates against criteria",
+      "Analytics and data tracking for recruitment performance and company-wide goals",
+      "Candidate experience features including career site builder and email campaigns",
+      "All-in-one recruitment platform for attract, engage, hire, and onboard",
+      "450+ integrations with HR systems, job boards, e-signing, and assessment tools",
+      "Automation and triggers for candidate communication and workflow efficiency"
+    ],
+    "target_personas": [
+      "Recruiters",
+      "Hiring managers",
+      "Growing companies scaling from small teams to enterprises",
+      "Ambitious companies focused on hiring growth"
+    ]
+  }
+}
