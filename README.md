@@ -1,36 +1,60 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# GTM Outbound Generator
 
-## Getting Started
+A live AI demo built on Teamtailor's public data. Audition piece for the
+Forward Deployed AI Accelerator role at Teamtailor.
 
-First, run the development server:
+Type any prospect company name, the page streams back a cold email an
+AE at Teamtailor could send to that company's Head of Talent today. The
+model is constrained to only name real Teamtailor customers and features.
+
+## Stack
+
+- Next.js 16 (App Router) + React 19
+- Tailwind v4 + GSAP 3
+- Claude Opus 4.7 via the Anthropic SDK, streamed
+- Prompt caching on the static Teamtailor context block (~90% cost reduction on repeat runs)
+- Firecrawl + Python + Claude Haiku 4.5 for the one-time context build
+
+## Architecture (3 layers)
+
+**Layer 1, scrape (run once, locally):**
+`scrape_teamtailor_context.py` pulls Teamtailor's public surfaces (customers
+page, product page, integrations directory, homepage) via Firecrawl and
+extracts structured data with Haiku into `app/teamtailor_context.json`.
+
+**Layer 2, the page:**
+A cinematic single-page React app with a hero, the live demo, three
+animated feature cards (industry matcher, live reasoning feed, meeting
+scheduler), a sticky-stacking Protocol section, manifesto, and CTA.
+
+**Layer 3, the API:**
+`app/api/generate/route.ts` is a Node runtime endpoint that streams Opus
+4.7. The Teamtailor context is split into two cacheable system blocks,
+the user message just carries the prospect company and target role.
+
+## Run locally
 
 ```bash
+echo "ANTHROPIC_API_KEY=sk-ant-..." > .env.local
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Deploy
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npx vercel
+```
 
-## Learn More
+Add `ANTHROPIC_API_KEY` as an env var in the Vercel project settings.
 
-To learn more about Next.js, take a look at the following resources:
+## Why this exists
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The role asks for someone who builds AI tools fluently, embeds in GTM
+workflows, and ships internal tools, with a bias toward action over
+theoretical presentations. The smallest honest answer to "what would you
+ship in week one" is a tool that already runs in week zero.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Built by Pascoal Dias, [pascoal-dias.netlify.app](https://pascoal-dias.netlify.app).
