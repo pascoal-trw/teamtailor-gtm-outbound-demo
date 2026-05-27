@@ -138,106 +138,82 @@ function TypewriterCard() {
   );
 }
 
-function SchedulerCard() {
-  const [active, setActive] = useState<number | null>(null);
-  const [saved, setSaved] = useState(false);
-  const [cursorPos, setCursorPos] = useState({ x: 12, y: 12 });
+function LiquidCard() {
+  // Cycle through the 7 days every 1.4s so reviewers see both branches resolve.
+  const DAY_NAMES = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  // Liquid uses %u where Mon=1...Sun=7. JS Date.getDay() is Sun=0...Sat=6.
+  const liquidNum = (jsDay: number) => (jsDay === 0 ? 7 : jsDay);
 
+  const [jsDay, setJsDay] = useState<number>(new Date().getDay());
   useEffect(() => {
-    let cancelled = false;
-    const cells = [80, 200, 320]; // x positions for Tuesday and Thursday
-    const cycle = async () => {
-      while (!cancelled) {
-        // Move to Tuesday (index 2)
-        setSaved(false);
-        setActive(null);
-        await delay(900);
-        setCursorPos({ x: 130, y: 90 });
-        await delay(700);
-        setActive(2);
-        await delay(900);
-        setCursorPos({ x: 220, y: 90 });
-        await delay(600);
-        setActive(4);
-        await delay(900);
-        // Move to Save
-        setCursorPos({ x: 200, y: 175 });
-        await delay(700);
-        setSaved(true);
-        await delay(1800);
-      }
-    };
-    cycle();
-    return () => {
-      cancelled = true;
-    };
+    const t = setInterval(() => setJsDay((d) => (d + 1) % 7), 1400);
+    return () => clearInterval(t);
   }, []);
 
-  const days = ["S", "M", "T", "W", "T", "F", "S"];
+  const n = liquidNum(jsDay);
+  const earlyWeek = n < 4;
+  const greeting = earlyWeek
+    ? "Hope you're having a good start to the week."
+    : "Hope you're having a good week.";
+  const ask = earlyWeek
+    ? "Are you available anytime this week?"
+    : "Are you available anytime next week?";
 
   return (
     <article className="bg-paper rounded-[2rem] border border-ink/10 p-7 sm:p-9 shadow-[0_2px_0_rgba(17,17,17,0.04)] relative overflow-hidden">
       <header className="mb-6">
         <div className="font-mono text-[10px] uppercase tracking-widest text-ink-soft/70 mb-3">
-          03 / Meeting CTA
+          03 / Liquid Syntax
         </div>
         <h3 className="font-sans font-bold tracking-tighter-2 text-2xl leading-tight">
-          Always proposes next week, Tue or Thu.
+          Day-aware CTAs with Liquid templating.
         </h3>
       </header>
 
-      <div className="relative rounded-2xl bg-off-white border border-ink/10 p-5 h-[200px] overflow-hidden">
-        <div className="grid grid-cols-7 gap-2">
-          {days.map((d, i) => {
-            const isActive = active === i;
-            return (
-              <div
-                key={i}
-                className={`aspect-square rounded-lg flex items-center justify-center font-mono text-xs transition-all duration-300 ${
-                  isActive
-                    ? "bg-signal text-paper border-signal scale-95"
-                    : "bg-paper border border-ink/10 text-ink-soft"
-                }`}
-              >
-                {d}
-              </div>
-            );
-          })}
+      <div className="rounded-2xl bg-ink/95 p-4 font-mono text-[11px] leading-relaxed text-paper/90 overflow-hidden">
+        <div className="flex items-center justify-between mb-2 text-paper/40 text-[9px] uppercase tracking-widest">
+          <span>liquid</span>
+          <span className="flex items-center gap-1.5">
+            <span className="inline-block w-1.5 h-1.5 rounded-full bg-signal pulse-dot" />
+            today = {DAY_NAMES[jsDay]} ({n})
+          </span>
+        </div>
+        <div className="text-paper/55">
+          {"{% assign today_number = 'now' | date: '%u' | plus: 0 %}"}
+        </div>
+        <div className="text-paper/55">
+          {"{% if today_number "}
+          <span className="text-signal">&lt;</span>
+          {" 4 %}"}
         </div>
         <div
-          className={`mt-5 rounded-full px-4 py-2 text-center font-mono text-xs uppercase tracking-widest transition-colors duration-300 ${
-            saved
-              ? "bg-ink text-paper"
-              : "bg-paper border border-ink/15 text-ink-soft"
+          className={`pl-3 transition-opacity duration-300 ${
+            earlyWeek ? "text-paper" : "text-paper/25"
           }`}
         >
-          {saved ? "Sent ✓" : "Next week"}
+          &quot;Are you available anytime this week?&quot;
         </div>
-        <svg
-          className="absolute pointer-events-none transition-all duration-700"
-          width="22"
-          height="22"
-          style={{
-            left: cursorPos.x,
-            top: cursorPos.y,
-            transitionTimingFunction: "cubic-bezier(0.65, 0, 0.35, 1)",
-          }}
-          viewBox="0 0 22 22"
+        <div className="text-paper/55">{"{% else %}"}</div>
+        <div
+          className={`pl-3 transition-opacity duration-300 ${
+            earlyWeek ? "text-paper/25" : "text-paper"
+          }`}
         >
-          <path
-            d="M2 2 L2 17 L7 12 L10 18 L13 17 L10 11 L17 11 Z"
-            fill="#111"
-            stroke="#fff"
-            strokeWidth="1"
-          />
-        </svg>
+          &quot;Are you available anytime next week?&quot;
+        </div>
+        <div className="text-paper/55">{"{% endif %}"}</div>
+      </div>
+
+      <div className="mt-3 px-4 py-3 rounded-2xl bg-off-white border border-ink/10">
+        <div className="font-mono text-[9px] uppercase tracking-widest text-ink-soft/55 mb-1.5">
+          Resolves to
+        </div>
+        <div className="font-sans text-sm text-ink leading-snug">
+          {greeting} {ask}
+        </div>
       </div>
     </article>
   );
-}
-
-function delay(ms: number) {
-  return new Promise((r) => setTimeout(r, ms));
 }
 
 export function FeatureCards() {
@@ -257,7 +233,7 @@ export function FeatureCards() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-7">
           <ShufflerCard />
           <TypewriterCard />
-          <SchedulerCard />
+          <LiquidCard />
         </div>
       </div>
     </section>

@@ -86,7 +86,7 @@ Subject: Built you a thing before our first call
 Hey,
 
 I applied for the FDA role yesterday. Instead of a CV, I built this:
-https://teamtailor-gtm-outbound-demo.vercel.app
+https://teamtailor-gtm.vercel.app
 
 It's a live tool that generates AE outbound from your public customer
 page. Type any prospect, watch a Claude Opus 4.7 email stream in,

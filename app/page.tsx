@@ -228,14 +228,6 @@ function HireCTA() {
             <Mail className="w-4 h-4" />
             <span>Reply to Pascoal</span>
           </a>
-          <a
-            href="https://pascoal-dias.netlify.app"
-            target="_blank"
-            rel="noreferrer noopener"
-            className="lift font-mono text-xs uppercase tracking-widest text-ink-soft hover:text-ink px-4 py-4"
-          >
-            Portfolio →
-          </a>
         </div>
       </div>
     </section>
@@ -284,7 +276,6 @@ function Footer() {
           </div>
           <ul className="space-y-2 font-sans text-sm">
             <li><a className="lift hover:text-paper flex items-center gap-2" href="mailto:pascoal@systechly.com"><Mail className="w-3.5 h-3.5" />Email</a></li>
-            <li><a className="lift hover:text-paper flex items-center gap-2" href="https://pascoal-dias.netlify.app" target="_blank" rel="noreferrer">Portfolio</a></li>
           </ul>
         </div>
       </div>
@@ -292,10 +283,6 @@ function Footer() {
       <div className="max-w-6xl mx-auto mt-14 pt-6 border-t border-paper/10 flex flex-wrap items-center justify-between gap-3">
         <div className="font-mono text-[10px] uppercase tracking-widest text-paper/45">
           © 2026 Pascoal Dias, Systechly
-        </div>
-        <div className="font-mono text-[10px] uppercase tracking-widest text-paper/55 flex items-center gap-2">
-          <span className="inline-block w-2 h-2 rounded-full bg-[#3ec05c] pulse-dot" />
-          System operational
         </div>
       </div>
     </footer>
