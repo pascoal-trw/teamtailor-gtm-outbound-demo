@@ -7,7 +7,7 @@ import { FeatureCards } from "./components/FeatureCards";
 import { Protocol } from "./components/Protocol";
 
 const HERO_IMG =
-  "https://images.unsplash.com/photo-1505635552518-3448ff116af3?auto=format&fit=crop&w=2400&q=80";
+  "https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=2400&q=80";
 
 function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -147,7 +147,7 @@ function Philosophy() {
         className="absolute inset-0 bg-cover bg-center opacity-[0.10]"
         style={{
           backgroundImage:
-            "url(https://images.unsplash.com/photo-1487014679447-9f8336841d58?auto=format&fit=crop&w=2400&q=80)",
+            "url(https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=2400&q=80)",
         }}
         aria-hidden
       />

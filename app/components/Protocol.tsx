@@ -119,8 +119,8 @@ export function Protocol() {
 
   return (
     <section id="protocol" className="relative w-full bg-off-white">
-      <div className="px-4 sm:px-8 pt-20 sm:pt-28">
-        <div className="mx-auto max-w-6xl mb-12">
+      <div className="px-4 sm:px-8 pt-16 sm:pt-20 pb-4 sm:pb-6">
+        <div className="mx-auto max-w-6xl">
           <div className="font-mono text-xs uppercase tracking-widest text-ink-soft mb-3">
             Protocol
           </div>

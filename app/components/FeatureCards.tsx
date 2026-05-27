@@ -35,29 +35,39 @@ function ShufflerCard() {
         </h3>
       </header>
 
-      <div className="relative h-[160px]">
-        {items.map((it, i) => {
-          const offset = i;
+      <div className="relative h-[200px]">
+        {items.slice(0, 4).map((it, i) => {
           const isTop = i === 0;
           return (
             <div
               key={it.name + i}
-              className="absolute inset-x-0 rounded-2xl border border-ink/15 bg-off-white p-4 transition-all duration-[700ms]"
+              className="absolute inset-x-0 rounded-2xl border border-ink/15 bg-off-white overflow-hidden transition-all duration-[700ms]"
               style={{
-                transform: `translateY(${offset * 14}px) scale(${1 - offset * 0.04})`,
-                opacity: isTop ? 1 : 0.55 - offset * 0.12,
-                zIndex: SHUFFLE_ITEMS.length - i,
-                transitionTimingFunction: "cubic-bezier(0.34, 1.56, 0.64, 1)",
+                top: 0,
+                transform: `translateY(${i * 10}px) scale(${1 - i * 0.04})`,
+                opacity: isTop ? 1 : Math.max(0, 0.5 - i * 0.18),
+                zIndex: 10 - i,
+                transitionTimingFunction: "cubic-bezier(0.34, 1.4, 0.64, 1)",
+                height: isTop ? "auto" : "100%",
+                visibility: i > 2 ? "hidden" : "visible",
               }}
             >
-              <div className="flex items-baseline justify-between">
-                <span className="font-sans font-semibold text-lg">{it.name}</span>
-                <span className="font-mono text-[10px] uppercase tracking-widest text-ink-soft/60">
-                  match
-                </span>
-              </div>
-              <div className="font-mono text-xs text-ink-soft mt-1">{it.industry}</div>
-              <div className="font-sans text-sm text-signal mt-2">{it.match}</div>
+              {isTop ? (
+                <div className="p-5">
+                  <div className="flex items-baseline justify-between mb-2">
+                    <span className="font-sans font-semibold text-lg leading-none">
+                      {it.name}
+                    </span>
+                    <span className="font-mono text-[10px] uppercase tracking-widest text-ink-soft/60">
+                      match
+                    </span>
+                  </div>
+                  <div className="font-mono text-xs text-ink-soft mb-3">{it.industry}</div>
+                  <div className="font-sans text-sm text-signal leading-snug">{it.match}</div>
+                </div>
+              ) : (
+                <div className="h-full" aria-hidden />
+              )}
             </div>
           );
         })}

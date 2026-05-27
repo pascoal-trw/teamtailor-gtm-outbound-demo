@@ -123,7 +123,7 @@ export function LiveDemo() {
             <button
               type="submit"
               disabled={!company.trim()}
-              className="btn-magnetic rounded-[2rem] bg-signal text-paper px-7 py-5 font-mono text-sm uppercase tracking-widest flex items-center justify-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed hover:text-paper"
+              className="btn-magnetic rounded-[2rem] bg-signal text-paper px-7 py-5 font-mono text-sm uppercase tracking-widest flex items-center justify-center gap-2 disabled:bg-ink/10 disabled:text-ink-soft/60 disabled:cursor-not-allowed disabled:before:hidden hover:text-paper"
             >
               <Sparkles className="w-4 h-4" />
               <span>Generate</span>
@@ -165,17 +165,35 @@ export function LiveDemo() {
               prompt-cached context
             </span>
           </div>
-          <pre
-            ref={outRef}
-            className={`m-0 px-6 py-7 sm:px-10 sm:py-10 min-h-[320px] max-h-[520px] overflow-auto whitespace-pre-wrap font-sans text-base leading-relaxed text-ink ${
-              loading ? "stream-cursor" : ""
-            }`}
-          >
-            {output ||
-              (loading
-                ? ""
-                : "The generated email will appear here. Type a company name and hit Generate, or pick a preset above.")}
-          </pre>
+          {output || loading ? (
+            <pre
+              ref={outRef}
+              className={`m-0 px-6 py-7 sm:px-10 sm:py-10 min-h-[320px] max-h-[520px] overflow-auto whitespace-pre-wrap font-sans text-base leading-relaxed text-ink ${
+                loading ? "stream-cursor" : ""
+              }`}
+            >
+              {output}
+            </pre>
+          ) : (
+            <div className="px-6 py-7 sm:px-10 sm:py-10 min-h-[320px] font-sans text-base leading-relaxed text-ink-soft/40 select-none">
+              <div className="font-mono text-[10px] uppercase tracking-widest text-ink-soft/35 mb-4">
+                Subject: <span className="text-ink-soft/60">▌</span>
+              </div>
+              <div className="mb-4">Hey,</div>
+              <div className="mb-4 h-[1em] w-3/4 bg-ink-soft/10 rounded" />
+              <div className="mb-4 space-y-2">
+                <div className="h-[1em] w-full bg-ink-soft/10 rounded" />
+                <div className="h-[1em] w-[88%] bg-ink-soft/10 rounded" />
+                <div className="h-[1em] w-[60%] bg-ink-soft/10 rounded" />
+              </div>
+              <div className="mb-4 h-[1em] w-2/3 bg-ink-soft/10 rounded" />
+              <div className="h-[1em] w-40 bg-ink-soft/10 rounded" />
+              <div className="mt-8 font-mono text-[10px] uppercase tracking-widest text-ink-soft/45 flex items-center gap-2">
+                <span className="inline-block w-1.5 h-1.5 bg-signal rounded-full pulse-dot" />
+                Awaiting prospect input
+              </div>
+            </div>
+          )}
           {error && (
             <div className="px-6 py-3 border-t border-signal/30 bg-signal/5 font-mono text-xs text-signal">
               {error}
