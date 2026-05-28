@@ -1,104 +1,137 @@
-# 90-second Loom script
+# 2-minute Loom script
 
-Tight, no rambling. Total time: 90s.
+Three tools, the playbook, the close. Total time: 2:00.
 
-Open the deployed page in full screen before recording. Have a second
-browser tab with the Porsche generation pre-cleared.
-
----
-
-## 0:00 – 0:10 (10s) — Cold open, no preamble
-
-> "Hey Marcus, I'm Pascoal. Applying for the Forward Deployed AI
-> Accelerator role. Instead of a CV I built this, in an afternoon. Let
-> me show you."
-
-*(While speaking: scroll from top to the live demo section.)*
+Open https://teamtailor-gtm.vercel.app in full screen. Have the page
+already scrolled to the top. Browser zoom 110% so the type reads on
+mobile playback. Mute notifications, hide bookmarks bar.
 
 ---
 
-## 0:10 – 0:25 (15s) — Frame what they're about to watch
+## 0:00 – 0:08 (8s) — Cold open
 
-> "It's a tool that generates AE outbound from your public customer
-> page. Type any company, the model picks the right Teamtailor customer
-> reference for the industry, picks the right feature for the pain, and
-> streams a five-line email."
+> "Marcus, Pascoal. Applying for the FDA role. Instead of a CV, I built
+> three tools across your GTM workflow and a week-one plan. Two minutes."
 
-*(While speaking: hover over the input box, hand over the preset chips.)*
+*(While speaking: page is at the top, hero fully visible.)*
 
 ---
 
-## 0:25 – 0:50 (25s) — First generation
+## 0:08 – 0:20 (12s) — Frame what they're watching
 
-*(Click "Porsche" preset. Email streams in.)*
+*(Scroll slowly to the demo section so the tab bar is centred.)*
 
-> "Watch the matching. For Porsche I get Lotus as the customer reference,
-> automotive luxury match, and Career Site as the feature, because that's
-> the brand-experience play. No first name in the greeting. No em dashes.
-> 'Next week, Tuesday or Thursday.' The output rules are enforced in the
-> system prompt."
-
----
-
-## 0:50 – 1:05 (15s) — Show adaptability
-
-*(Type "Huel" in the input, hit Generate.)*
-
-> "Different industry, different match. Now it's reaching for the DTC
-> reference, the Co-pilot or automation feature. The Teamtailor context
-> is prompt-cached, so each generation costs about five cents and runs
-> in seconds."
+> "Three live tools an AE at Teamtailor could open Monday morning. Each
+> one streams Claude Opus 4.7, constrained to your real customers and
+> features so it can't hallucinate. Same architecture, three different
+> leverage points."
 
 ---
 
-## 1:05 – 1:20 (15s) — Architecture, quickly
+## 0:20 – 0:40 (20s) — Tool 1, Outbound
 
-*(Scroll to the Protocol section, let the sticky cards do the visual.)*
+*(Tab is already on Outbound. Click the "Porsche" preset.)*
 
-> "Under the hood: three layers. Python scrapes Teamtailor's public
-> surfaces once. Haiku extracts structured context. Opus 4.7 generates
-> the email at request time, constrained to real customers and features
-> so it can't hallucinate."
+> "Outbound. Porsche. Watch the match. Lotus pulled in as the customer
+> reference, automotive luxury fit, and Career Site as the feature, because
+> that's the brand-experience play. No first name. No em dashes. 'Next
+> week, Tuesday or Thursday.' Rules enforced in the system prompt."
+
+*(Email finishes streaming.)*
 
 ---
 
-## 1:20 – 1:30 (10s) — Close
+## 0:40 – 1:05 (25s) — Tool 2, Reply Triage (this is the killer one)
 
-*(Scroll to the Hire CTA.)*
+*(Click the "Reply triage" tab. Click the "Soft no, timing" preset.)*
 
-> "Source on GitHub, link below. The role asks for bias toward action.
-> This page IS my application. Reply when you're free."
+> "Reply triage. A prospect just sent back a polite Q3 deferral. Watch
+> what the tool does. Classification: not now, high confidence. The play:
+> accept the timing, lock a Q3 touchpoint, don't burn the relationship
+> by pushing. And it drafts the actual reply, with the right DTC
+> references baked in. AE pastes a reply, gets the next move in five
+> seconds."
+
+*(Output finishes.)*
+
+---
+
+## 1:05 – 1:25 (20s) — Tool 3, Account Brief
+
+*(Click the "Account brief" tab. Click "Arsenal FC" preset.)*
+
+> "Account brief. The 60-second prep card before a discovery call. Arsenal
+> goes in. Out comes the industry read, the closest customer reference,
+> the lead feature, and the top three objections handled, including the
+> GDPR and EU AI Act one. Plus a killer opening question. AE before a
+> call, reads this in a minute, walks in armed."
+
+*(Pause briefly on the output.)*
+
+---
+
+## 1:25 – 1:45 (20s) — The Week One Plan
+
+*(Scroll to the Week One section. Let the stages reveal as you scroll.)*
+
+> "And this is the part the job description is actually asking for. The
+> five-stage journey: awareness, first win, regular integration, full
+> workflow transformation, self-sufficiency. Pulled straight from your
+> posting. This is how I'd run that playbook inside Teamtailor's GTM
+> org starting day one. Concrete actions per stage. The last one is
+> training a champion per function so the team ships without me."
+
+---
+
+## 1:45 – 2:00 (15s) — Close
+
+*(Scroll fast to the Hire CTA.)*
+
+> "Three tools, one playbook, shipped in week zero. Source on GitHub,
+> link below. The job asks for bias toward action. This page is my
+> application. Reply when you're free."
 
 ---
 
 ## Production notes
 
-- **Setup**: full-screen browser, hide bookmarks bar, mute notifications.
+- **Setup**: full-screen browser, hide bookmarks bar, mute notifications, browser zoom 110%.
+- **Streaming wait**: don't talk over the streaming, let the typing breathe for a beat per tool.
 - **Voice**: low, slow, slightly bored. Confidence reads as competence.
-- **Avoid**: "um", "basically", "really", "actually". One pass per take.
-- **Take 3**: don't try for perfection. The first usable take is the one.
+- **Avoid**: "um", "basically", "really", "actually", "literally". One pass per take.
+- **Takes**: first usable take ships. Perfectionism here is the wrong move.
+- **Backup**: if a tool stalls mid-stream, cut to the next tab and keep moving. Don't apologise.
 
 ## What to paste in the email to Marcus
 
 ```
-Subject: Built you a thing before our first call
+Subject: Built you a GTM toolkit before our first call
 
 Hey,
 
-I applied for the FDA role yesterday. Instead of a CV, I built this:
+I applied for the Forward Deployed AI Accelerator role yesterday.
+Instead of a CV, I built this:
 https://teamtailor-gtm.vercel.app
 
-It's a live tool that generates AE outbound from your public customer
-page. Type any prospect, watch a Claude Opus 4.7 email stream in,
-constrained to real Teamtailor customers and features. 90-second walk-
-through here: [LOOM_URL]
+Three live AI tools across your GTM workflow, all streaming, all
+constrained to real Teamtailor customers and features:
 
+  1. Cold outbound generator
+  2. Reply triage (paste a reply, get the play + draft response)
+  3. 60-second account brief for discovery calls
+
+Plus a week-one plan that maps directly to the awareness, first win,
+integration, transformation, self-sufficiency progression from the job
+description.
+
+Two-minute walkthrough: [LOOM_URL]
 Source: https://github.com/pascoal-trw/teamtailor-gtm-outbound-demo
 
-I've been building agents and tools like this for 3 years, mostly for
-US recruitment agencies and ecom brands. The role asks for bias toward
-action, so this page is the smallest honest answer I could give to
-"what would you ship in week one."
+Three years building agents, automations and internal tools for
+recruitment agencies and ecom brands, mostly embedded in their GTM
+and ops teams. The role asks for bias toward action, so this page
+is the smallest honest answer I could give to "what would you ship
+in week one."
 
 Worth a call next week, Tuesday or Thursday?
 
