@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "GTM Outbound, built on Teamtailor's public data",
+  title: "Teamtailor GTM toolkit, week-one shipped",
   description:
-    "A live AI demo by Pascoal Dias. An audition for the Teamtailor Forward Deployed AI Accelerator role.",
+    "Three live AI tools across Teamtailor's GTM workflow: cold outbound, reply triage, account brief. An audition for the Forward Deployed AI Accelerator role by Pascoal Dias.",
 };
 
 export default function RootLayout({

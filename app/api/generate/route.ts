@@ -6,8 +6,7 @@ export const maxDuration = 60;
 
 const OPUS = "claude-opus-4-7";
 
-// Supplemental customer list, hand-curated from the logo wall on teamtailor.com/en/customers/.
-// The scraped JSON has a partial list, this adds the recognizable enterprise brands.
+// Logo wall, hand-curated from teamtailor.com/en/customers/.
 const LOGO_WALL = [
   { name: "Porsche", industry: "automotive luxury" },
   { name: "Arsenal FC", industry: "professional sports" },
@@ -26,27 +25,39 @@ const LOGO_WALL = [
   { name: "Lotus", industry: "automotive performance" },
 ];
 
-type Body = { company?: string; role?: string };
+type ToolType = "outbound" | "reply" | "brief";
+type Body = {
+  type?: ToolType;
+  company?: string;
+  role?: string;
+  reply_text?: string;
+};
 
-function buildSystemBlocks(): { type: "text"; text: string; cache_control: { type: "ephemeral" } }[] {
+type SystemBlock = {
+  type: "text";
+  text: string;
+  cache_control: { type: "ephemeral" };
+};
+
+// Build the Teamtailor context block, shared and cached across all 3 tools.
+function buildContextBlock(): SystemBlock {
   const customers = (context as any).customers?.customers ?? [];
   const features = (context as any).product?.features ?? [];
   const positioning = (context as any).product?.positioning ?? "";
   const categories = (context as any).integrations?.integration_categories ?? [];
   const homepage = (context as any).homepage ?? {};
-  const voiceAnchor = (context as any).marcus_voice_anchor ?? "";
 
-  const teamtailorContext = `
-YOU ARE AN AE AT TEAMTAILOR WRITING A COLD EMAIL.
+  const text = `
+TEAMTAILOR KNOWLEDGE BASE (shared context for all GTM tools)
 
-TEAMTAILOR POSITIONING
+POSITIONING
 ${positioning}
 Tagline: ${homepage.tagline ?? ""}
 
 PRIMARY VALUE PROPS
 ${(homepage.primary_value_props ?? []).map((p: string) => `  - ${p}`).join("\n")}
 
-CORE FEATURES (you may reference any by name)
+CORE FEATURES (reference by name)
 ${features.map((f: any) => `  - ${f.name}: ${f.value_prop}`).join("\n")}
 
 INTEGRATION CATEGORIES
@@ -54,45 +65,155 @@ ${categories.join(", ")}
 
 CUSTOMERS YOU MAY NAME (real Teamtailor customers, never invent)
 Scraped customer stories:
-${customers.map((c: any) => `  - ${c.name}${c.industry ? " (" + c.industry + ")" : ""}${c.quote ? ' — "' + c.quote.slice(0, 140) + '"' : ""}`).join("\n")}
+${customers
+  .map(
+    (c: any) =>
+      `  - ${c.name}${c.industry ? " (" + c.industry + ")" : ""}${
+        c.quote ? ' — "' + c.quote.slice(0, 140) + '"' : ""
+      }`
+  )
+  .join("\n")}
 
 Visible logo wall (recognizable enterprise brands):
 ${LOGO_WALL.map((c) => `  - ${c.name} (${c.industry})`).join("\n")}
 
-VOICE REFERENCE (the FDA hiring manager's writing style, mirror this tone)
-${voiceAnchor}
+COMMON OBJECTIONS YOU MIGHT HEAR
+  - "We just switched ATS / are mid-implementation"
+  - "We're too small / too big for that"
+  - "Looks like another job board"
+  - "Procurement / IT will block this"
+  - "We're happy with [Greenhouse / Workday / Lever]"
+  - "AI in hiring is risky / regulated (EU AI Act, GDPR)"
+  - "Show me ROI"
 `.trim();
 
-  const rules = `
+  return { type: "text", text, cache_control: { type: "ephemeral" } };
+}
+
+// Tool-specific rules block.
+function buildToolBlock(type: ToolType): SystemBlock {
+  const map: Record<ToolType, string> = {
+    outbound: `
+TOOL: OUTBOUND COLD EMAIL GENERATOR
+You are an AE at Teamtailor writing a cold email to a prospect.
+
 OUTPUT RULES, NON-NEGOTIABLE:
-1. Output exactly: a subject line, blank line, greeting, blank line, email body, blank line, sign-off.
-2. The greeting is exactly "Hey," with no first name.
-3. Body is 4 to 5 lines max, conversational, no jargon.
-4. Never use em dashes or en dashes anywhere. Use commas.
-5. Name ONE real Teamtailor customer that matches the prospect's industry. Pick from the customer list above only. Never invent a customer.
-6. Name ONE Teamtailor feature that maps to the prospect's likely hiring pain. Pick from the features list above only.
-7. Include a meeting suggestion in the form "next week, Tuesday or Thursday".
-8. Sign off as "Pascoal at Teamtailor" on its own line.
-9. Do not output any meta commentary, do not explain your choices, do not wrap in code fences. Output the raw email only.
+1. Output exactly: subject line, blank line, "Hey,", blank line, body (4-5 lines max), blank line, sign-off.
+2. Greeting is exactly "Hey," with no first name.
+3. Never use em dashes or en dashes. Use commas.
+4. Name ONE real Teamtailor customer matching the prospect's industry, pulled from the KB above.
+5. Name ONE Teamtailor feature mapped to their likely hiring pain.
+6. Include the meeting CTA "next week, Tuesday or Thursday".
+7. Sign off "Pascoal at Teamtailor" on its own line.
+8. Output the raw email only. No commentary, no code fences.
+`.trim(),
 
-PROCESS, INTERNAL:
-- Infer the prospect's industry from their company name and your training knowledge.
-- Choose the closest-fit customer (industry match, then size match).
-- Choose the most relevant feature (high-volume, distributed, employer brand, automation, AI co-pilot, etc.).
-- Write the email in the voice of a sharp, low-pressure AE.
+    reply: `
+TOOL: REPLY TRIAGE
+You are an AE at Teamtailor and a prospect just replied to your cold email.
+
+YOUR JOB: in 30 seconds, classify the reply, recommend the next move, and draft the response.
+
+OUTPUT FORMAT, EXACTLY (use these section headers):
+
+CLASSIFICATION
+  One of: POSITIVE, OBJECTION, NOT_NOW, REFERRAL, UNCLEAR, UNSUBSCRIBE
+  Confidence: HIGH / MEDIUM / LOW
+  One-line read: <8 word summary of what they really mean>
+
+PLAY
+  Recommended next move in one short sentence (book the meeting / handle objection X / nurture / disqualify).
+  Risk to watch: <one short sentence>
+
+DRAFT REPLY
+  Write the actual reply Pascoal should send back.
+  Same email rules apply: "Hey," opener, no em dashes, no first name, conversational, 3-5 lines, sign off "Pascoal at Teamtailor".
+  If the prospect named an objection, address it specifically using the KB above (real customer reference + feature). If positive, just propose the meeting "next week, Tuesday or Thursday".
+
+Do not output anything outside those three sections. No code fences.
+`.trim(),
+
+    brief: `
+TOOL: 60-SECOND ACCOUNT BRIEF
+You are an AE prepping for a discovery call. Build a brief Pascoal can scan in 60 seconds before dialing.
+
+OUTPUT FORMAT, EXACTLY (use these section headers):
+
+ACCOUNT SNAPSHOT
+  Industry: <best guess>
+  Size signal: <rough employee count or scale signal>
+  Hiring pulse: <growing fast / steady / cutting / unknown> + one-line why
+  Likely buyer titles: <2 to 3 titles>
+
+WHY TEAMTAILOR WINS HERE
+  Closest customer reference: <name from KB> (why this maps)
+  Lead feature: <feature name from KB> (why it solves their pain)
+  Killer line for the discovery call: <one quoteable sentence>
+
+TOP 3 OBJECTIONS YOU WILL HEAR
+  1. <objection> -> <one-line handle>
+  2. <objection> -> <one-line handle>
+  3. <objection> -> <one-line handle>
+
+OPENING QUESTION
+  One sharp open-ended question to start the call with.
+
+NON-NEGOTIABLE:
+- Never invent customers or features. Pull from the KB above only.
+- Never use em dashes or en dashes. Use commas or hyphens.
+- Be specific. Vague answers are worse than no answer.
+- No code fences, no preamble, no closing notes.
+`.trim(),
+  };
+
+  return { type: "text", text: map[type], cache_control: { type: "ephemeral" } };
+}
+
+function buildUserMessage(type: ToolType, body: Body): string {
+  if (type === "outbound") {
+    return `
+PROSPECT
+Company: ${body.company}
+Target role to email: ${body.role || "Head of Talent"}
+
+Write the cold email now. Output only the email.
 `.trim();
+  }
+  if (type === "reply") {
+    return `
+PROSPECT REPLY
+From: ${body.company || "an unnamed prospect"}
 
-  return [
-    { type: "text", text: teamtailorContext, cache_control: { type: "ephemeral" } },
-    { type: "text", text: rules, cache_control: { type: "ephemeral" } },
-  ];
+"""
+${body.reply_text}
+"""
+
+Triage now. Output exactly the three sections.
+`.trim();
+  }
+  return `
+ACCOUNT
+Company: ${body.company}
+Optional notes: ${body.role || "(none)"}
+
+Build the 60-second brief. Output exactly the sections defined.
+`.trim();
+}
+
+function validate(type: ToolType, body: Body): string | null {
+  if (type === "reply") {
+    if (!body.reply_text?.trim()) return "reply_text is required";
+    if (body.reply_text.length > 4000) return "reply_text too long";
+    return null;
+  }
+  if (!body.company?.trim()) return "company is required";
+  if ((body.company || "").length > 120) return "company name too long";
+  return null;
 }
 
 export async function POST(req: Request) {
   const apiKey = process.env.ANTHROPIC_API_KEY;
-  if (!apiKey) {
-    return new Response("ANTHROPIC_API_KEY not set", { status: 500 });
-  }
+  if (!apiKey) return new Response("ANTHROPIC_API_KEY not set", { status: 500 });
 
   let body: Body = {};
   try {
@@ -101,25 +222,19 @@ export async function POST(req: Request) {
     return new Response("Invalid JSON body", { status: 400 });
   }
 
-  const company = (body.company ?? "").trim();
-  const role = (body.role ?? "Head of Talent").trim() || "Head of Talent";
-  if (!company) {
-    return new Response("company is required", { status: 400 });
+  const type: ToolType = (body.type as ToolType) || "outbound";
+  if (!["outbound", "reply", "brief"].includes(type)) {
+    return new Response("Unknown tool type", { status: 400 });
   }
-  if (company.length > 120) {
-    return new Response("company name too long", { status: 400 });
-  }
+
+  const validationError = validate(type, body);
+  if (validationError) return new Response(validationError, { status: 400 });
 
   const client = new Anthropic({ apiKey });
-  const system = buildSystemBlocks();
+  const system = [buildContextBlock(), buildToolBlock(type)];
+  const userMessage = buildUserMessage(type, body);
 
-  const userMessage = `
-PROSPECT
-Company: ${company}
-Target role to email: ${role}
-
-Write the cold email now. Output only the email, nothing else.
-`.trim();
+  const maxTokens = type === "outbound" ? 800 : 1200;
 
   const stream = new ReadableStream({
     async start(controller) {
@@ -127,7 +242,7 @@ Write the cold email now. Output only the email, nothing else.
       try {
         const response = await client.messages.stream({
           model: OPUS,
-          max_tokens: 800,
+          max_tokens: maxTokens,
           system,
           messages: [{ role: "user", content: userMessage }],
         });

@@ -5,6 +5,7 @@ import { ArrowRight, Mail } from "lucide-react";
 import { LiveDemo } from "./components/LiveDemo";
 import { FeatureCards } from "./components/FeatureCards";
 import { Protocol } from "./components/Protocol";
+import { WeekOne } from "./components/WeekOne";
 
 const HERO_IMG =
   "https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=2400&q=80";
@@ -45,8 +46,14 @@ function Navbar() {
         How
       </a>
       <a
+        href="#week-one"
+        className="hidden md:inline font-mono text-[11px] uppercase tracking-widest px-3 py-2 rounded-full lift"
+      >
+        Week one
+      </a>
+      <a
         href="#protocol"
-        className="hidden sm:inline font-mono text-[11px] uppercase tracking-widest px-3 py-2 rounded-full lift"
+        className="hidden md:inline font-mono text-[11px] uppercase tracking-widest px-3 py-2 rounded-full lift"
       >
         Protocol
       </a>
@@ -82,14 +89,14 @@ function Hero() {
           </div>
 
           <h1 className="font-sans font-bold tracking-tighter-3 text-[14vw] sm:text-[8.5vw] leading-[0.85] max-w-[14ch]">
-            Ship the
+            Week one,
             <br />
-            <span className="font-serif italic text-signal block">outbound.</span>
+            <span className="font-serif italic text-signal block">already shipped.</span>
           </h1>
 
           <p className="mt-7 font-sans text-lg sm:text-2xl max-w-2xl text-paper/85 leading-snug">
-            A live AI demo built on Teamtailor&apos;s public data, before our first call.
-            <span className="text-paper/60"> Type any prospect, watch the email stream.</span>
+            Three live AI tools across the Teamtailor GTM workflow, built on your public data, before our first call.
+            <span className="text-paper/60"> Outbound, reply triage, account brief. All streaming. Try them below.</span>
           </p>
 
           <div className="mt-9 flex flex-wrap items-center gap-4">
@@ -97,20 +104,20 @@ function Hero() {
               href="#demo"
               className="btn-magnetic bg-signal text-paper px-7 py-4 rounded-full font-mono text-xs uppercase tracking-widest flex items-center gap-2"
             >
-              <span>Generate an email</span>
+              <span>Try the three tools</span>
               <ArrowRight className="w-4 h-4" />
             </a>
             <a
-              href="#protocol"
+              href="#week-one"
               className="lift font-mono text-xs uppercase tracking-widest text-paper/80 hover:text-paper px-4 py-4"
             >
-              See the architecture →
+              The week-one plan →
             </a>
           </div>
 
           <div className="mt-12 sm:mt-16 flex flex-wrap items-center gap-x-8 gap-y-2 font-mono text-[10px] uppercase tracking-widest text-paper/55">
-            <span>Built on Claude Opus 4.7</span>
-            <span>Next.js 16 + edge streaming</span>
+            <span>3 GTM tools live</span>
+            <span>Claude Opus 4.7 streaming</span>
             <span>Constrained to real Teamtailor data</span>
           </div>
         </div>
@@ -134,8 +141,8 @@ function Philosophy() {
     return () => obs.disconnect();
   }, []);
 
-  const words1 = "Most candidates send pitches.".split(" ");
-  const words2 = "I sent a shipped tool.".split(" ");
+  const words1 = "Most candidates send a CV.".split(" ");
+  const words2 = "I shipped a toolkit.".split(" ");
 
   return (
     <section
@@ -192,8 +199,9 @@ function Philosophy() {
         </p>
 
         <p className="mt-12 font-mono text-xs text-paper/45 max-w-2xl">
-          The role asks for bias toward action. Talking about agents I could build seemed
-          like the wrong opening move.
+          The role asks to embed in GTM, find leverage, build tools, and coach
+          teams from awareness to self-sufficiency. The honest first move was
+          to start.
         </p>
       </div>
     </section>
@@ -216,9 +224,11 @@ function HireCTA() {
           <span className="font-serif italic text-signal">still open?</span>
         </h2>
         <p className="mt-10 font-sans text-lg sm:text-xl text-ink-soft max-w-2xl mx-auto leading-relaxed">
-          I am Pascoal Dias, an AI developer with three years building agents, automations
-          and tools for recruitment agencies and ecom brands. This page is the smallest
-          honest answer I could give to &ldquo;what would you ship in week one.&rdquo;
+          I am Pascoal Dias. Three years building agents, automations and
+          internal tools for recruitment agencies and ecom brands, mostly
+          embedded in their GTM and ops teams. This page is the smallest
+          honest answer I could give to &ldquo;what would you ship in week
+          one.&rdquo;
         </p>
         <div className="mt-12 flex flex-wrap gap-4 justify-center items-center">
           <a
@@ -252,8 +262,9 @@ function Footer() {
             Site
           </div>
           <ul className="space-y-2 font-sans text-sm">
-            <li><a className="lift hover:text-paper" href="#demo">Live demo</a></li>
+            <li><a className="lift hover:text-paper" href="#demo">3 live tools</a></li>
             <li><a className="lift hover:text-paper" href="#how">How it works</a></li>
+            <li><a className="lift hover:text-paper" href="#week-one">Week-one plan</a></li>
             <li><a className="lift hover:text-paper" href="#protocol">Protocol</a></li>
           </ul>
         </div>
@@ -280,11 +291,7 @@ function Footer() {
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto mt-14 pt-6 border-t border-paper/10 flex flex-wrap items-center justify-between gap-3">
-        <div className="font-mono text-[10px] uppercase tracking-widest text-paper/45">
-          © 2026 Pascoal Dias, Systechly
-        </div>
-      </div>
+      <div className="max-w-6xl mx-auto mt-14 pt-6 border-t border-paper/10" />
     </footer>
   );
 }
@@ -297,6 +304,7 @@ export default function Page() {
       <LiveDemo />
       <FeatureCards />
       <Protocol />
+      <WeekOne />
       <Philosophy />
       <HireCTA />
       <Footer />
